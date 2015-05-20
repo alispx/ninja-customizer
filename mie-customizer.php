@@ -249,7 +249,7 @@ class Mie_Customizer {
 							'type' 				=> 'theme_mod', 
 							'transport'   		=> $data['transport'],
 							'capability' 		=> 'edit_theme_options',
-							'sanitize_callback'	=> '',
+							'sanitize_callback'	=> 'esc_attr',
 						) );
 					$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
 						$data['slug'], 
@@ -272,7 +272,7 @@ class Mie_Customizer {
 							'type' 				=> 'theme_mod', 
 							'transport'   		=> $data['transport'],
 							'capability' 		=> 'edit_theme_options',
-							'sanitize_callback'	=> '',
+							'sanitize_callback'	=> 'esc_attr',
 						) );
 					$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
 						$data['slug'], 
@@ -295,7 +295,7 @@ class Mie_Customizer {
 							'type' 				=> 'theme_mod', 
 							'transport'   		=> $data['transport'],
 							'capability' 		=> 'edit_theme_options',
-							'sanitize_callback'	=> '',
+							'sanitize_callback'	=> 'esc_attr',
 						) );
 					$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
 						$data['slug'], 
@@ -317,7 +317,7 @@ class Mie_Customizer {
 							'type' 				=> 'theme_mod', 
 							'transport'   		=> $data['transport'],
 							'capability' 		=> 'edit_theme_options',
-							'sanitize_callback'	=> '',
+							'sanitize_callback'	=> 'esc_attr',
 						) );
 					$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 
 						$data['slug'], 
@@ -395,7 +395,7 @@ class Mie_Customizer {
 							'default' 			=> $data['default'], 
 							'capability' 		=> 'edit_theme_options', 
 							'type' 				=> 'theme_mod',
-							'sanitize_callback'	=> '', 
+							'sanitize_callback'	=> 'esc_attr', 
 							));   
 					$wp_customize->add_control( new Category_Dropdown_Custom_Control( $wp_customize, 
 						$data['slug'], 
@@ -414,7 +414,7 @@ class Mie_Customizer {
 							'default' 			=> $data['default'], 
 							'capability' 		=> 'edit_theme_options', 
 							'type' 				=> 'theme_mod',
-							'sanitize_callback'	=> '', 
+							'sanitize_callback'	=> 'esc_attr', 
 							));   
 					$wp_customize->add_control( new Menu_Dropdown_Custom_Control( $wp_customize, 
 						$data['slug'], 
@@ -433,7 +433,7 @@ class Mie_Customizer {
 							'default' 			=> $data['default'], 
 							'capability' 		=> 'edit_theme_options', 
 							'type' 				=> 'theme_mod',
-							'sanitize_callback'	=> '', 
+							'sanitize_callback'	=> 'esc_attr', 
 							));   
 					$wp_customize->add_control( new Post_Dropdown_Custom_Control( $wp_customize, 
 						$data['slug'], 
@@ -452,7 +452,7 @@ class Mie_Customizer {
 							'default' 			=> $data['default'], 
 							'capability' 		=> 'edit_theme_options', 
 							'type' 				=> 'theme_mod',
-							'sanitize_callback'	=> '', 
+							'sanitize_callback'	=> 'esc_attr', 
 							));   
 					$wp_customize->add_control( new Post_Type_Dropdown_Custom_Control( $wp_customize, 
 						$data['slug'], 
