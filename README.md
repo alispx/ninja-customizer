@@ -1,10 +1,9 @@
 # Mie-Customizer
 Simple WordPress Theme Customizer Framework
 
-<img src="screenshot.png" alt="Mie Screenshot" width=880 height=400>
+<b>Mie Customizer</b> is a simple WordPress Customizer framework. This is not a plugin. It is only a simple library that you can include directly to your WordPress theme. 
 
-<b>Mie Customizer</b> adalah sebuah Theme Customizer Framework sederhana yang terdiri dari rangkaian class dan function yang digabungkan sehingga menghasilkan sebuah framework yang amat sederhana. Ini bukanlah sebuah plugin, akan tetapi hanya sebuah library yang di include langsung ke dalam file tema WordPress. Pada awalnya tujuannya adalah hanya sekedar untuk mempermudah para developer tema wordpress untuk membuat kustomisasi tema dengan preview langsung. Akan tetapi harapan kedepannya adalah agar para developer tema WordPress dapat move on dari Theme Option ke Theme Customizer.
+The purpose of this library is to make it easy for WordPress theme developer to customize a WordPress theme with live preview. We hope it can help WordPress theme developer to move from Theme Options / Theme Settings page to WordPress Customizer.
 
-Framework ini dibuat oleh newbie, untuk newbie.
+Current documentation is still available on Indonesian <a href="http://mie.alispx.me">here</a>. The English translation is still in progress <a href="https://github.com/alispx/mie-docs">here</a>.
 
-Untuk Detail tentang cara penggunaan, silahkan kunjungi link berikut ini : <a href="http://mie.alispx.me">Dokumentasi</a>
