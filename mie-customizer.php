@@ -562,6 +562,30 @@ class Mie_Customizer {
 							 )));
 					break;
 					
+				case 'buttonset' :
+					require_once( trailingslashit ( MIE_DIR ) . 'includes/buttonset-custom-control.php' );
+					$wp_customize->add_setting( $data['slug'], 
+						array(
+							'default' 			=> $data['default'],
+							'type' 				=> 'theme_mod', 
+							'transport'   		=> $data['transport'],
+							'capability' 		=> 'edit_theme_options',
+							'sanitize_callback'	=> 'esc_attr',
+						) );
+					$wp_customize->add_control( new Buttonset_Custom_Control( $wp_customize, 
+						$data['slug'], 
+						array( 
+							'label' 	=> $data['label'], 
+							'section' 	=> $data['section'],
+							'default' 	=> $data['default'],
+							'priority'	=> $data['priority'],
+							'settings' 	=> $data['slug'], 
+							'choices'	=> $data['choices'], 
+							'type'		=> 'buttonset'
+							)
+						));
+					break;
+
 				default:
 					break;
 			}
@@ -598,6 +622,9 @@ class Mie_Customizer {
 		wp_localize_script( 'mie-methods', 'mieScript', $mie_options );
 		wp_enqueue_style( 'mie-style', MIE_URI . 'assets/css/mie-styles.css' );
 		wp_enqueue_style( 'mie-plugins', MIE_URI . 'assets/css/plugins.min.css' );
+
+		wp_enqueue_style( 'mie-jquery-ui', MIE_URI . 'assets/css/jquery-ui.min.css' );
+		wp_enqueue_style( 'mie-jquery-ui-theme', MIE_URI . 'assets/css/jquery-ui.theme.min.css' );
 	}
 
 	/**
