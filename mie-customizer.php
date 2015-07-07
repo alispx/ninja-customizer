@@ -42,8 +42,8 @@ class Mie_Customizer {
 	 * @author alispx
 	 **/
 	function mie_define_constants() {
-		define( 'MIE_DIR', trailingslashit( get_template_directory() . '/Mie-Customizer' ) );
-		define( 'MIE_URI', trailingslashit( get_template_directory_uri() . '/Mie-Customizer' ) );
+		if ( ! defined( 'MIE_DIR' ) ) define( 'MIE_DIR', trailingslashit( get_template_directory() . '/Mie-Customizer' ) );
+		if ( ! defined( 'MIE_URI' ) )define( 'MIE_URI', trailingslashit( get_template_directory_uri() . '/Mie-Customizer' ) );
 	}
 
 	/**
