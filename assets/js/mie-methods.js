@@ -8,39 +8,75 @@ $ = jQuery.noConflict();
 			allow_single_deselect :true,
 			width:"100%",
 		});
-		 
-		$.each( mieScript, function( index ) {
+	});
 
-			var dataType = mieScript[index].type;
-			var dataSlug = mieScript[index].slug;
-			var dataDependsOn = mieScript[index].dependson;
-			var dataCondition = mieScript[index].condition;
-			var dataValue 	= mieScript[index].value;
+	// ======================================================
+	// MIE CUSTOMIZER DEPENDENCY
+	// ------------------------------------------------------
+	$.MIE.DEPENDENCY = function( el, param ) {
 
-			if ( dataDependsOn) {
-				var dataSelector = '#customize-control-' + dataSlug;
-				var dataSelectorDep = '#customize-control-' + dataDependsOn +" input";
+		// Access to jQuery and DOM versions of element
+		var base    = this;
+		base.$el 	= $(el);
+		base.el  	= el;
 
-				$(dataSelector).attr("data-depends-on",dataDependsOn).hide();
-				
-				if ( $(dataSelectorDep).is(":checked") ) {
-					$("[data-depends-on="+dataDependsOn+"]").show();
-				} else {
-					$("[data-depends-on="+dataDependsOn+"]").hide();
-				}
+		base.init = function () {
 
-				$(dataSelectorDep).on("click",function(){
-					
-					if( $(dataSelectorDep).is(":checked") ){
-						$("[data-depends-on="+dataDependsOn+"]").slideDown();
-					} else {
-						$("[data-depends-on="+dataDependsOn+"]").slideUp();
-					}
+			base.ruleset = $.deps.createRuleset();
+
+			// required for shortcode attrs
+			var cfg = {
+				show: function( el ) {
+					el.removeClass('hidden');
+				},
+				hide: function( el ) {
+					el.addClass('hidden');
+				},
+				log: false,
+				checkTargets: false
+			};
+		
+			base.depRoot();
+
+			$.deps.enable( base.$el, base.ruleset, cfg );
+
+		};
+
+		base.depRoot = function() {
+
+			base.$el.each( function() {
+
+				$(this).find('[data-controller]').each( function() {
+
+					var $this   = $(this),
+					_controller = $this.data('controller').split('|'),
+					_condition  = $this.data('condition').split('|'),
+					_value      = $this.data('value').toString().split('|'),
+					_rules      = base.ruleset;
+
+					$.each(_controller, function(index, element) {
+
+						var value = _value[index] || '',
+						condition = _condition[index] || _condition[0];
+
+						_rules = _rules.createRule('[data-customize-setting-link="'+ element +'"]', condition, value);
+						_rules.include($this);
+
+					});
 
 				});
-			}
-		});
 
-	});
+			});
+
+		};
+
+		base.init();
+	};
+
+	$.fn.MIE_DEPENDENCY = function ( param ) {
+		return this.each(function () {
+			new $.MIE.DEPENDENCY( this, param );
+		});
+	};
 
 } )( jQuery );

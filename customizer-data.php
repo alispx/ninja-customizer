@@ -499,7 +499,7 @@ function mie_custom_settings_data( $mie_options ) {
 					
 			);
 
-		// Section Checkbox Radio
+		// Section Button Set Radio
 		$mie_options[] = array(
 			'slug'		=> 'mie_buttonset_settings',
 			'label'		=> __( 'Buttonset Settings', '_mie' ),
@@ -514,6 +514,31 @@ function mie_custom_settings_data( $mie_options ) {
 				'priority'	=> 1, 
 				'label'		=> __( 'Buttonset Field', '_mie' ),
 				'section'	=> 'mie_buttonset_settings',
+				'selector'	=> '.site-headers',
+				'property'	=> 'background',
+				'type' 		=> 'buttonset',
+				'choices'  => array(
+					'option_1' => __( 'Option 1', '_mie' ),
+					'option_2' => __( 'Option 2', '_mie' ),
+					'option_3' => __( 'Option 3', '_mie' ),
+				),
+			);
+
+		// Section Dependency Settings
+		$mie_options[] = array(
+			'slug'		=> 'mie_dependency_settings',
+			'label'		=> __( 'Dependency Settings', '_mie' ),
+			'panel' 	=> 'mie_custom_settings',
+			'priority'	=> 50,
+			'type' 		=> 'section'
+		);
+		
+			$mie_options[] = array( 
+				'slug'		=> 'mie_example_dependency_field', 
+				'default'	=> 'option_2', 
+				'priority'	=> 1, 
+				'label'		=> __( 'Buttonset Field', '_mie' ),
+				'section'	=> 'mie_dependency_settings',
 				'selector'	=> '.site-headers',
 				'property'	=> 'background',
 				'type' 		=> 'buttonset',

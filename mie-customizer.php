@@ -7,7 +7,7 @@
  * @license   http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  */
 class Mie_Customizer {
-  	
+	
 	protected static $default_data = array(
 			'default' 		=> '',
 			'slug' 			=> '',
@@ -26,11 +26,45 @@ class Mie_Customizer {
 
 	function __construct() {
 
+		$this->mie_define_constants();
+		$this->mie_load_custom_controls();
+		$this->mie_load_customizer_data();
 		add_action( 'customize_register', array( &$this, 'mie_theme_customizer_register' ), 10 );
 		add_action( 'customize_preview_init', array( &$this, 'mie_customizer_live_preview' ) , 1 );
 		add_action( 'wp_head', array( &$this, 'mie_customizer_print_css' ), 10 );
 		add_action( 'wp_head', array( &$this, 'mie_customizer_font_output' ), 15 );
 		add_action( 'customize_controls_enqueue_scripts', array( &$this, 'mie_customizer_enqueue_scripts' ), 20 );
+	}
+
+	/**
+	 * Define constants
+	 *
+	 * @author alispx
+	 **/
+	function mie_define_constants() {
+		define( 'MIE_DIR', trailingslashit( get_template_directory() . '/Mie-Customizer' ) );
+		define( 'MIE_URI', trailingslashit( get_template_directory_uri() . '/Mie-Customizer' ) );
+	}
+
+	/**
+	 * Automatically load all custom control files
+	 *
+	 * @author alispx 
+	 **/
+	function mie_load_custom_controls() {
+		foreach ( glob( MIE_DIR . "includes/*.php" ) as $filename ) {
+			include $filename;
+		}
+	}
+
+	/**
+	 * Load customizer file
+	 *
+	 * @return void
+	 * @author 
+	 **/
+	function mie_load_customizer_data() {
+		require_once MIE_DIR . '/customizer-data.php';
 	}
 
 	/**
@@ -49,11 +83,6 @@ class Mie_Customizer {
 	 * @since 1.0
 	 */
 	function mie_theme_customizer_register( $wp_customize ) {
-		
-		// Rename Colors Sections Into General Colors
-		$wp_customize->remove_section( 'colors' );
-		$wp_customize->remove_section( 'header_image' );
-		$wp_customize->remove_section( 'background_image' );
 		
 		$mie_get_data 	= array();
 		$mie_data 		= $this->mie_get_customizer_data( $mie_get_data );
@@ -351,7 +380,6 @@ class Mie_Customizer {
 					break;
 
 				case 'image_select' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/image-select-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -389,7 +417,6 @@ class Mie_Customizer {
 					break;
 
 				case 'category_dropdown' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/category-dropdown-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -408,7 +435,6 @@ class Mie_Customizer {
 					break;
 
 				case 'menu_dropdown' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/menu-dropdown-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -427,7 +453,6 @@ class Mie_Customizer {
 					break;
 
 				case 'post_dropdown' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/post-dropdown-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -446,7 +471,6 @@ class Mie_Customizer {
 					break;
 
 				case 'post_type_dropdown' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/post-type-dropdown-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -465,7 +489,6 @@ class Mie_Customizer {
 					break;
 
 				case 'dropdown_user' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/user-dropdown-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -484,7 +507,6 @@ class Mie_Customizer {
 					break;
 
 				case 'editor' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/text-editor-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -503,7 +525,6 @@ class Mie_Customizer {
 					break;
 
 				case 'google_font' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/googlefont-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -523,7 +544,6 @@ class Mie_Customizer {
 					break;
 
 				case 'select_chosen' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/chosen-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -543,7 +563,6 @@ class Mie_Customizer {
 					break;
 
 				case 'image_select' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/image-select-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array( 
 							'default' 			=> $data['default'], 
@@ -563,7 +582,6 @@ class Mie_Customizer {
 					break;
 					
 				case 'buttonset' :
-					require_once( trailingslashit ( MIE_DIR ) . 'includes/buttonset-custom-control.php' );
 					$wp_customize->add_setting( $data['slug'], 
 						array(
 							'default' 			=> $data['default'],
